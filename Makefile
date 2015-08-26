@@ -1,9 +1,15 @@
-SDCard.1.0.4.tar.bz2:
+sdimage = SDCard.1.0.4.tar.bz2
+arduino_ide = IntelArduino-1.6.0-Linux64.txz
+
+$(sdimage):
 	wget http://downloadmirror.intel.com/24355/eng/SDCard.1.0.4.tar.bz2
 
-IntelArduino-1.6.0-Linux64.txz:
+$(arduino_ide):
 	wget http://downloadmirror.intel.com/24783/eng/IntelArduino-1.6.0-Linux64.txz
 
-.DEFAULT_GOAL := all
+.PHONY: download
+download: $(sdimage) $(arduino_ide)
+
 .PHONY: all
-all: SDCard.1.0.4.tar.bz2 IntelArduino-1.6.0-Linux64.txz
+.DEFAULT_GOAL := all
+all: download
