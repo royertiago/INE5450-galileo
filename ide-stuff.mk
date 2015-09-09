@@ -64,6 +64,7 @@ $(ide_stuff_files_with_wildcard): $(arduino_ide)
 	tar -Jxf $(arduino_ide) --directory ide-stuff \
 		arduino-1.6.0+Intel/hardware/intel/i586-uclibc/cores/arduino/ \
 		--strip-components=6
+	touch $(ide_stuff_files)
 
 .PHONY: ide-stuff
 ide-stuff: $(ide_stuff_files)
