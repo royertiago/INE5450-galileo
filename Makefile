@@ -1,6 +1,8 @@
 sdimage = SDCard.1.0.4.tar.bz2
 arduino_ide = IntelArduino-1.6.0-Linux64.txz
 
+include ide-stuff.mk
+
 $(sdimage):
 	wget http://downloadmirror.intel.com/24355/eng/SDCard.1.0.4.tar.bz2
 
