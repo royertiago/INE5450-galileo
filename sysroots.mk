@@ -4880,12 +4880,14 @@ sysroots_files_with_wildcard := $(subst sysroots,sysroot%,$(sysroots_files))
 # tar preserves the file timestamps, which confuses make.
 # So, we touch every single file to be sure that their timestamps
 # are older that $(arduino_ide), which was just downloaded.
-$(sysroots_files_with_wildcard): $(arduino_ide)
+$(sysroots_files_with_wildcard): $(arduino_ide) $(library_archive)
 	mkdir -p sysroots
 	tar -Jxf $(arduino_ide) --directory sysroots \
 		arduino-1.6.0+Intel/hardware/tools/i586/sysroots/ --strip-components=5
 	@echo touch $$'(sysroots_files)'
 	@-touch $(sysroots_files)
+	tar -zxf $(library_archive) \
+		--directory sysroots/i586-poky-linux-uclibc/usr/lib
 
 .PHONY: sysroots
 sysroots: $(sysroots_files)
