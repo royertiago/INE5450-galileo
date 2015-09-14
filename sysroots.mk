@@ -4877,6 +4877,9 @@ sysroots_files := \
 # We will use the same trickery used in ide-stuff.mk.
 sysroots_files_with_wildcard := $(subst sysroots,sysroot%,$(sysroots_files))
 
+# tar preserves the file timestamps, which confuses make.
+# So, we touch every single file to be sure that their timestamps
+# are older that $(arduino_ide), which was just downloaded.
 $(sysroots_files_with_wildcard): $(arduino_ide)
 	mkdir -p sysroots
 	tar -Jxf $(arduino_ide) --directory sysroots \
