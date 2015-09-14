@@ -1,6 +1,7 @@
 sdimage = SDCard.1.0.4.tar.bz2
 arduino_ide = IntelArduino-1.6.0-Linux64.txz
 
+include sdcard-libraries.mk
 include ide-stuff.mk
 include sysroots.mk
 
