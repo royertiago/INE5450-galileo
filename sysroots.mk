@@ -4881,6 +4881,12 @@ sysroots_files_with_wildcard := $(subst sysroots,sysroot%,$(sysroots_files))
 # So, we touch every single file to be sure that their timestamps
 # are older that $(arduino_ide), which was just downloaded.
 $(sysroots_files_with_wildcard): $(arduino_ide) $(library_archive)
+	if [ ! -d /usr/include/opencv2 -a ! -d /usr/local/include/opencv2 ]; then \
+		echo The makefile uses the OpenCV headers from your distribution; \
+		echo to setup the build environment. Please install them,; \
+		echo either in /usr/include or /usr/local/include.; \
+		exit 1;\
+	fi
 	mkdir -p sysroots
 	tar -Jxf $(arduino_ide) --directory sysroots \
 		arduino-1.6.0+Intel/hardware/tools/i586/sysroots/ --strip-components=5
@@ -4888,6 +4894,13 @@ $(sysroots_files_with_wildcard): $(arduino_ide) $(library_archive)
 	@-touch $(sysroots_files)
 	tar -zxf $(library_archive) \
 		--directory sysroots/i586-poky-linux-uclibc/usr/lib
+	if [ ! -d /usr/include/opencv2 ]; then \
+		cp -r /usr/local/include/opencv /usr/local/include/opencv2 \
+			sysroots/i586-poky-linux-uclibc/usr/include; \
+	else \
+		cp -r /usr/include/opencv /usr/include/opencv2 \
+			sysroots/i586-poky-linux-uclibc/usr/include; \
+	fi
 
 .PHONY: sysroots
 sysroots: $(sysroots_files)
