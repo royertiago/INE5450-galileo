@@ -3,7 +3,7 @@ arduino_ide = IntelArduino-1.6.0-Linux64.txz
 
 include sdcard-libraries.mk
 include ide-stuff.mk
-include sysroots.mk
+include clanton-tiny-sdk.mk
 
 $(sdimage):
 	wget http://downloadmirror.intel.com/24355/eng/SDCard.1.0.4.tar.bz2
