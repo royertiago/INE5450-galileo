@@ -17,6 +17,9 @@
 # This file assumes $(arduino_ide) is already defined.
 
 ide_stuff_files := \
+	ide-stuff/variant.h \
+	ide-stuff/variant.cpp \
+	ide-stuff/pins_arduino.h \
 	ide-stuff/AdvancedIO.h \
 	ide-stuff/Stream.cpp \
 	ide-stuff/AnalogIO.h \
@@ -101,8 +104,9 @@ ide_stuff_files_with_wildcard := $(subst ide-stuff,ide-stuf%,$(ide_stuff_files))
 $(ide_stuff_files_with_wildcard): $(arduino_ide)
 	mkdir -p ide-stuff
 	tar -Jxf $(arduino_ide) --directory ide-stuff \
+		--strip-components=6 \
 		arduino-1.6.0+Intel/hardware/intel/i586-uclibc/cores/arduino/ \
-		--strip-components=6
+		arduino-1.6.0+Intel/hardware/intel/i586-uclibc/variants/galileo_fab_g/
 	touch $(ide_stuff_files)
 
 .PHONY: ide-stuff
