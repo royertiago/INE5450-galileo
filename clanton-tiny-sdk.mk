@@ -12,7 +12,7 @@
 CLANTON_DIR := /opt/clanton-tiny/1.4.2/sysroots
 
 .PHONY: install-clanton-tiny-sdk
-install-clanton-tiny-sdk: $(arduino_ide) $(library_archive)
+install-clanton-tiny-sdk: $(arduino_ide) $(sdcard-libraries)
 	if [ ! -d /usr/include/opencv2 -a ! -d /usr/local/include/opencv2 ]; then \
 		echo The makefile uses the OpenCV headers from your distribution; \
 		echo to setup the build environment. Please install them,; \
@@ -22,7 +22,7 @@ install-clanton-tiny-sdk: $(arduino_ide) $(library_archive)
 	mkdir -p $(CLANTON_DIR)
 	tar -Jxf $(arduino_ide) --directory $(CLANTON_DIR) \
 		arduino-1.6.0+Intel/hardware/tools/i586/sysroots/ --strip-components=5
-	tar -zxf $(library_archive) \
+	tar -zxf $(sdcard-libraries) \
 		--directory $(CLANTON_DIR)/i586-poky-linux-uclibc/usr/lib
 	if [ ! -d /usr/include/opencv2 ]; then \
 		cp -r /usr/local/include/opencv /usr/local/include/opencv2 \

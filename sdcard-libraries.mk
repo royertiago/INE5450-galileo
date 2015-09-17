@@ -10,11 +10,11 @@
 # you may run the commands of this recipe manually.
 # The rest of the makefile should be able to handle this generation.
 
-library_archive := sdcard-libraries.tar.gz
+sdcard-libraries := sdcard-libraries.tar.gz
 
-$(library_archive): $(sdimage)
+$(sdcard-libraries): $(sdimage)
 	@if [ 0 -ne $$(id -u) ]; then \
-		echo You must be root to build $(library_archive).; \
+		echo You must be root to build $(sdcard-libraries).; \
 		echo See sdcard-libraries.mk for more details.; \
 		exit 1; \
 	fi; \
@@ -34,11 +34,11 @@ $(library_archive): $(sdimage)
 	\
 	echo Compressing libraries...; \
 	libs=$$(find $$dir/image/usr/lib/ -maxdepth 1 \! -type d -printf '%f '); \
-	tar zcf $(library_archive) --directory $$dir/image/usr/lib/ \
+	tar zcf $(sdcard-libraries) --directory $$dir/image/usr/lib/ \
 		$$(cat libs.txt); \
 	\
 	echo Cleaning up...; \
 	umount $$dir/image; \
 	rm -rf $$dir; \
 	\
-	echo File $(library_archive) created.
+	echo File $(sdcard-libraries) created.
