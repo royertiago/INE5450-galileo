@@ -1,8 +1,13 @@
 # This piece of makefile handles the creation of the directory /opt/clanton-tiny,
 # which contains cross-compilers and libraries.
 #
-# Since we are installing things to /opt/clanton-tiny,
-# we actually need root privileges to run this makefile.
+# The variable CLANTON_DIR holds the directory in which the cross-compilers
+# and its friends will be installed.
+# By default, it points to /opt/clanton-tiny/1.4.2/sysroots,
+# and thus to run the rule for 'install-clanton-tiny-sdk' we need root privileges.
+# However, the user may set this to (say) ./sysroots
+# and copy the directory afterwards,
+# so in this case the rule can run without root privileges.
 
 CLANTON_DIR := /opt/clanton-tiny/1.4.2/sysroots
 
