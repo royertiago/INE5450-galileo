@@ -35,5 +35,7 @@ install-clanton-tiny-sdk: $(arduino_ide) $(sdcard-libraries)
 	cd $(CLANTON_DIR)/i586-poky-linux-uclibc/usr/lib; \
 	for file in libopencv_*.2.4.3 libz.so.1.2.7; do \
 		link=$$(echo $$file | sed 's/.[0-9].[0-9].[0-9]$$//'); \
-		ln -s $$file $$link; \
+		if [ ! -e "$$link" ]; then \
+			ln -s $$file $$link; \
+		fi; \
 	done
