@@ -34,8 +34,7 @@ $(sdcard-libraries): $(sdimage)
 	\
 	echo Compressing libraries...; \
 	libs=$$(find $$dir/image/usr/lib/ -maxdepth 1 \! -type d -printf '%f '); \
-	tar zcf $(sdcard-libraries) --directory $$dir/image/usr/lib/ \
-		$$(cat libs.txt); \
+	tar zcf $(sdcard-libraries) --directory $$dir/image/usr/lib/ $$libs; \
 	\
 	echo Cleaning up...; \
 	umount $$dir/image; \
